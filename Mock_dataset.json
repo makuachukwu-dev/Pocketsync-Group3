@@ -1,0 +1,49 @@
+#Mock dataset for PocketSync (Group3)
+
+#User Object:
+  userID: String
+  userName: String
+  totalBalance: Number (NGN)
+  Account Object:
+  accountID: String
+  institutionName: String (e.g., "GTBank", "Kuda")
+  accountNumber: String (e.g., "0123456789")
+  accountBalance: Number (NGN)
+  lastUpdated: Timestamp
+  accountType: String (e.g., "Current", "Savings")
+
+#Creating Mock Datasets for test users
+
+{
+  "user": {
+    "userID": "user-001",
+    "userName": "Chinedu",
+    "totalBalance": 2450000
+  },
+  "accounts": [
+    {
+      "accountID": "acc-001",
+      "institutionName": "GTBank",
+      "accountNumber": "0123456789",
+      "accountBalance": 1450000,
+      "lastUpdated": "2026-06-24T10:30:00",
+      "accountType": "Current"
+    },
+    {
+      "accountID": "acc-002",
+      "institutionName": "Kuda",
+      "accountNumber": "9876543210",
+      "accountBalance": 800000,
+      "lastUpdated": "2026-06-25T09:15:00",
+      "accountType": "Savings"
+    },
+    {
+      "accountID": "acc-003",
+      "institutionName": "Opay",
+      "accountNumber": "4567891230",
+      "accountBalance": 200000,
+      "lastUpdated": "2026-06-25T08:00:00",
+      "accountType": "Wallet"
+    }
+  ]
+}
