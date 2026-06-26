@@ -23,6 +23,9 @@ export class MailService {
           port,
           secure,
           auth: { user, pass },
+          tls: {
+            rejectUnauthorized: false,
+          },
         });
       } else {
         console.warn("SMTP environment variables are missing; generating a mock/Ethereal mail account for local testing...");
