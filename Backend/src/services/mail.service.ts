@@ -24,7 +24,7 @@ export class MailService {
           secure,
           auth: { user, pass },
           tls: {
-            rejectUnauthorized: false,
+            rejectUnauthorized: process.env.NODE_ENV === "production",
           },
         });
       } else {

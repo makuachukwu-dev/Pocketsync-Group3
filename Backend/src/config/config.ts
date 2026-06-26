@@ -1,9 +1,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+if (!process.env.SESSION_SECRET) {
+  throw new Error("FATAL: SESSION_SECRET environment variable is missing! The application cannot start without a secure session secret.");
+}
+
 export const config = {
   port: Number(process.env.PORT ?? 3000),
-  sessionSecret: process.env.SESSION_SECRET ?? "dev-secret",
+  sessionSecret: process.env.SESSION_SECRET,
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
