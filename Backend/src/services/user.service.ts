@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import { UserRecord } from "../types/auth.types";
 
 export const users = new Map<string, UserRecord>();
@@ -27,6 +28,17 @@ export class UserService {
     return user;
   }
 
+  static createAppleUser(name: string, email: string, appleId: string): UserRecord {
+    const user: UserRecord = {
+      id: `user_${Date.now()}`,
+      email,
+      name,
+      appleId,
+    };
+    users.set(user.id, user);
+    return user;
+  }
+
   static findById(id: string): UserRecord | null {
     return users.get(id) ?? null;
   }
@@ -39,6 +51,46 @@ export class UserService {
     return Array.from(users.values()).find(
       (user) => user.googleId === googleId || user.email === email
     ) ?? null;
+  }
+
+  static findByAppleIdOrEmail(appleId: string, email: string): UserRecord | null {
+    return Array.from(users.values()).find(
+      (user) => user.appleId === appleId || user.email === email
+    ) ?? null;
+  }
+
+  static generateResetToken(email: string): { token: string; expires: Date } | null {
+    const user = this.findByEmail(email);
+    if (!user) return null;
+
+    const token = crypto.randomBytes(20).toString("hex");
+    const expires = new Date(Date.now() + 3600000); // 1 hour from now
+
+    this.updateUser(user.id, {
+      resetPasswordToken: token,
+      resetPasswordExpires: expires,
+    });
+
+    return { token, expires };
+  }
+
+  static resetPassword(token: string, newPasswordHash: string): boolean {
+    const user = Array.from(users.values()).find(
+      (u) =>
+        u.resetPasswordToken === token &&
+        u.resetPasswordExpires &&
+        u.resetPasswordExpires.getTime() > Date.now()
+    );
+
+    if (!user) return false;
+
+    this.updateUser(user.id, {
+      passwordHash: newPasswordHash,
+      resetPasswordToken: undefined,
+      resetPasswordExpires: undefined,
+    });
+
+    return true;
   }
 
   static updateUser(id: string, updates: Partial<UserRecord>): UserRecord | null {

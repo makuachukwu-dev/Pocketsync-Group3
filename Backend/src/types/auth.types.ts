@@ -6,7 +6,10 @@ export type UserRecord = {
   name: string;
   passwordHash?: string;
   googleId?: string;
+  appleId?: string;
   picture?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
 };
 
 export type SessionUser = {
