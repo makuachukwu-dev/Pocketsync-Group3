@@ -31,7 +31,11 @@ Authentication is managed via `express-session`.
       "me": "GET /me",
       "dashboard": "GET /dashboard",
       "googleAuth": "GET /auth/google",
-      "googleAuthCallback": "GET /auth/google/callback"
+      "googleAuthCallback": "GET /auth/google/callback",
+      "appleAuth": "GET /auth/apple",
+      "appleAuthCallback": "POST /auth/apple/callback",
+      "forgotPassword": "POST /forgot-password",
+      "resetPassword": "POST /reset-password"
     }
   }
   ```
@@ -191,3 +195,86 @@ Authentication is managed via `express-session`.
 * **Route:** `GET /auth/google/callback`
 * **Auth Required:** No
 * **Description:** Google calls this redirect callback after authentication. If authorization succeeds, it automatically sets the session cookie and redirects the client to the `/dashboard` route.
+
+---
+
+### 9. Forgot Password (Request Reset Link)
+* **Route:** `POST /forgot-password`
+* **Auth Required:** No
+* **Content-Type:** `application/json`
+* **Request Body:**
+  | Field | Type | Required | Description |
+  | :--- | :--- | :--- | :--- |
+  | `email` | `string` | Yes | Registered email to send the reset link to |
+* **Request Example:**
+  ```json
+  {
+    "email": "jane@example.com"
+  }
+  ```
+* **Success Response (200 OK):**
+  ```json
+  {
+    "message": "If an account with that email exists, a password reset link has been sent.",
+    "testToken": "90fa05f089f2f1c08df5bd57242c469f9d735268"
+  }
+  ```
+* **Error Responses:**
+  * **400 Bad Request:** Missing fields.
+    ```json
+    { "error": "Email is required" }
+    ```
+
+---
+
+### 10. Reset Password
+* **Route:** `POST /reset-password`
+* **Auth Required:** No
+* **Content-Type:** `application/json`
+* **Request Body:**
+  | Field | Type | Required | Description |
+  | :--- | :--- | :--- | :--- |
+  | `token` | `string` | Yes | Token received in the reset email / response |
+  | `password` | `string` | Yes | New password for the account |
+* **Request Example:**
+  ```json
+  {
+    "token": "90fa05f089f2f1c08df5bd57242c469f9d735268",
+    "password": "myNewSecurePassword123"
+  }
+  ```
+* **Success Response (200 OK):**
+  ```json
+  {
+    "message": "Password has been reset successfully"
+  }
+  ```
+* **Error Responses:**
+  * **400 Bad Request:** Missing parameters or invalid/expired token.
+    ```json
+    { "error": "Token and password are required" }
+    ```
+    or
+    ```json
+    { "error": "Password reset token is invalid or has expired" }
+    ```
+
+---
+
+### 11. Apple OAuth Sign-in Initiation
+* **Route:** `GET /auth/apple`
+* **Auth Required:** No
+* **Description:** Redirects the user's browser client to Apple's OAuth 2.0 Consent Screen.
+* **Error Responses:**
+  * **503 Service Unavailable:** Apple OAuth keys are missing in the server's `.env`.
+    ```json
+    { "error": "Apple sign-in is not configured yet" }
+    ```
+
+---
+
+### 12. Apple OAuth Callback Redirect Handler
+* **Route:** `POST /auth/apple/callback`
+* **Auth Required:** No
+* **Description:** Apple calls this redirect callback (via HTTP `POST` form post) after authentication. If authorization succeeds, it automatically sets the session cookie and redirects the client to the `/dashboard` route.
+

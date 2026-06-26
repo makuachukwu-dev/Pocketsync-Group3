@@ -13,6 +13,10 @@ export class WebController {
         dashboard: "GET /dashboard",
         googleAuth: "GET /auth/google",
         googleAuthCallback: "GET /auth/google/callback",
+        appleAuth: "GET /auth/apple",
+        appleAuthCallback: "POST /auth/apple/callback",
+        forgotPassword: "POST /forgot-password",
+        resetPassword: "POST /reset-password",
       },
     });
   }
