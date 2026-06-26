@@ -5,6 +5,6 @@ import { requireAuth } from "../middleware/auth.middleware";
 const router = Router();
 
 router.get("/me", requireAuth, UserController.getMe);
-router.get("/dashboard", requireAuth, UserController.getDashboard);
+router.post("/kyc/verify", requireAuth, UserController.verifyKyc);
 
 export default router;

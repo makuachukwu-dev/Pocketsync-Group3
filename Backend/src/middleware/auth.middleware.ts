@@ -20,3 +20,16 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   (req as AuthenticatedRequest).user = user;
   next();
 }
+
+export function requireKyc(req: Request, res: Response, next: NextFunction) {
+  const authReq = req as AuthenticatedRequest;
+  if (!authReq.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  if (authReq.user.kycStatus !== "verified") {
+    return res.status(403).json({ error: "KYC verification required before linking accounts" });
+  }
+
+  next();
+}

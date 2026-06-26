@@ -11,6 +11,7 @@ export class UserService {
       email,
       name,
       passwordHash,
+      kycStatus: "unverified",
     };
     users.set(user.id, user);
     return user;
@@ -23,6 +24,7 @@ export class UserService {
       name,
       googleId,
       picture,
+      kycStatus: "unverified",
     };
     users.set(user.id, user);
     return user;
@@ -34,9 +36,21 @@ export class UserService {
       email,
       name,
       appleId,
+      kycStatus: "unverified",
     };
     users.set(user.id, user);
     return user;
+  }
+
+  static verifyUserKyc(userId: string, verificationData: { bvn?: string; nin?: string }): UserRecord | null {
+    const user = this.findById(userId);
+    if (!user) return null;
+
+    return this.updateUser(userId, {
+      kycStatus: "verified",
+      bvn: verificationData.bvn || user.bvn,
+      nin: verificationData.nin || user.nin,
+    });
   }
 
   static findById(id: string): UserRecord | null {

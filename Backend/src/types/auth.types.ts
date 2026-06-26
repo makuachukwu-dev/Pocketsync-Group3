@@ -10,6 +10,9 @@ export type UserRecord = {
   picture?: string;
   resetPasswordToken?: string;
   resetPasswordExpires?: Date;
+  kycStatus?: "unverified" | "verified";
+  bvn?: string;
+  nin?: string;
 };
 
 export type SessionUser = {
