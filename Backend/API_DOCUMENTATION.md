@@ -278,3 +278,187 @@ Authentication is managed via `express-session`.
 * **Auth Required:** No
 * **Description:** Apple calls this redirect callback (via HTTP `POST` form post) after authentication. If authorization succeeds, it automatically sets the session cookie and redirects the client to the `/dashboard` route.
 
+---
+
+### 13. Verify KYC (BVN/NIN Gate)
+* **Route:** `POST /kyc/verify`
+* **Auth Required:** Yes (Active session cookie)
+* **Content-Type:** `application/json`
+* **Request Body:**
+  | Field | Type | Required | Description |
+  | :--- | :--- | :--- | :--- |
+  | `bvn` | `string` | No* | 11-digit Bank Verification Number |
+  | `nin` | `string` | No* | 11-digit National Identification Number |
+  *\*Note: At least one of `bvn` or `nin` must be provided.*
+* **Request Example:**
+  ```json
+  {
+    "bvn": "12345678901"
+  }
+  ```
+* **Success Response (200 OK):**
+  ```json
+  {
+    "message": "KYC verification successful",
+    "user": {
+      "id": "user_1782482842329",
+      "email": "chinedu_test@example.com",
+      "name": "Chinedu",
+      "kycStatus": "verified"
+    }
+  }
+  ```
+* **Error Responses:**
+  * **400 Bad Request:** Missing/invalid digit length.
+    ```json
+    { "error": "BVN or NIN is required for verification" }
+    ```
+    or
+    ```json
+    { "error": "BVN must be exactly 11 digits" }
+    ```
+
+---
+
+### 14. Fetch Supported Institutions
+* **Route:** `GET /institutions`
+* **Auth Required:** Yes (Active session cookie)
+* **Description:** Retrieve a list of supported banks/fintechs available for account aggregation.
+* **Success Response (200 OK):**
+  ```json
+  {
+    "institutions": [
+      { "id": "gtbank", "name": "GTBank", "logo": "gtbank-logo" },
+      { "id": "access", "name": "Access Bank", "logo": "access-logo" },
+      { "id": "kuda", "name": "Kuda", "logo": "kuda-logo" },
+      { "id": "opay", "name": "Opay", "logo": "opay-logo" },
+      { "id": "moniepoint", "name": "Moniepoint", "logo": "moniepoint-logo" }
+    ]
+  }
+  ```
+
+---
+
+### 15. Fetch Dashboard Aggregation Summary
+* **Route:** `GET /dashboard`
+* **Auth Required:** Yes (Active session cookie)
+* **Description:** Retrieve consolidated net worth and details of connected bank accounts.
+* **Success Response (200 OK):**
+  ```json
+  {
+    "totalBalance": 2426108,
+    "accountsCount": 2,
+    "accounts": [
+      {
+        "id": "acc_1782482842458_291",
+        "userId": "user_1782482842329",
+        "institutionId": "gtbank",
+        "institutionName": "GTBank",
+        "accountNumber": "1284317152",
+        "accountName": "Personal Savings",
+        "balance": 1174607,
+        "lastUpdated": "2026-06-26T14:07:22.458Z"
+      },
+      {
+        "id": "acc_1782482842468_951",
+        "userId": "user_1782482842329",
+        "institutionId": "kuda",
+        "institutionName": "Kuda",
+        "accountNumber": "7032388025",
+        "accountName": "Business Wallet",
+        "balance": 1251501,
+        "lastUpdated": "2026-06-26T14:07:22.468Z"
+      }
+    ]
+  }
+  ```
+
+---
+
+### 16. Connect/Link Bank Account
+* **Route:** `POST /accounts/connect`
+* **Auth Required:** Yes (Active session cookie AND Verified KYC)
+* **Content-Type:** `application/json`
+* **Request Body:**
+  | Field | Type | Required | Description |
+  | :--- | :--- | :--- | :--- |
+  | `institutionId` | `string` | Yes | Bank ID slug (e.g. `gtbank`) |
+  | `username` | `string` | Yes | Portal mock authentication username |
+  | `password` | `string` | Yes | Portal mock authentication password |
+  | `agreedToConsent` | `boolean` | Yes | Confirms permissions agreement (must be `true`) |
+* **Request Example:**
+  ```json
+  {
+    "institutionId": "gtbank",
+    "username": "chinedu123",
+    "password": "password123",
+    "agreedToConsent": true
+  }
+  ```
+* **Success Response (210 Created):**
+  ```json
+  {
+    "message": "Account connected successfully",
+    "account": {
+      "id": "acc_1782482842458_291",
+      "userId": "user_1782482842329",
+      "institutionId": "gtbank",
+      "institutionName": "GTBank",
+      "accountNumber": "1284317152",
+      "accountName": "Personal Savings",
+      "balance": 1174607,
+      "lastUpdated": "2026-06-26T14:07:22.458Z"
+    }
+  }
+  ```
+* **Error Responses:**
+  * **400 Bad Request:** Missing fields, missing consent, or account already linked.
+    ```json
+    { "error": "Institution, username, and password are required" }
+    ```
+    or
+    ```json
+    { "error": "You have already connected your GTBank account." }
+    ```
+  * **403 Forbidden:** User is not KYC-verified.
+    ```json
+    { "error": "KYC verification required before linking accounts" }
+    ```
+
+---
+
+### 17. Refresh Account Balance
+* **Route:** `POST /accounts/:accountId/refresh`
+* **Auth Required:** Yes (Active session cookie AND Verified KYC)
+* **Description:** Triggers mock account balance updates (varies mock balances slightly to simulate background feed updates).
+* **Success Response (200 OK):**
+  ```json
+  {
+    "message": "Account refreshed successfully",
+    "account": {
+      "id": "acc_1782482842458_291",
+      "userId": "user_1782482842329",
+      "institutionId": "gtbank",
+      "institutionName": "GTBank",
+      "accountNumber": "1284317152",
+      "accountName": "Personal Savings",
+      "balance": 1215840,
+      "lastUpdated": "2026-06-26T14:10:02.124Z"
+    }
+  }
+  ```
+
+---
+
+### 18. Disconnect Account
+* **Route:** `DELETE /accounts/:accountId`
+* **Auth Required:** Yes (Active session cookie AND Verified KYC)
+* **Description:** Disconnects/unlinks the specified bank account.
+* **Success Response (200 OK):**
+  ```json
+  {
+    "message": "Account disconnected successfully"
+  }
+  ```
+
+
