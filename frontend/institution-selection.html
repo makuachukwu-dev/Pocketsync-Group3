@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institution Selection</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<main class="institution-screen">
+
+    <button class="back-btn" onclick="history.back()">
+        ←
+    </button>
+
+    <h1>Link an Account</h1>
+
+    <p class="institution-subtitle">
+        Select your bank or fintech provider to continue.
+    </p>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search Institutions">
+    </div>
+
+    <h3 class="institution-heading">
+        Popular Institutions
+    </h3>
+
+    <div class="institution-list">
+
+        <div class="institution-card"  onclick="selectInstitution('GTBank', 'assets/images/Design System/Group 71.png')">
+
+            <div class="institution-info">
+                <img src="assets/images/Design System/Group 71.png" alt="GTBank">
+                <span>GTBank</span>
+            </div>
+
+            <span class="arrow">›</span>
+
+        </div>
+
+        <div class="institution-card" onclick="selectInstitution('Access Bank', 'assets/images/Design System/Group.png')">
+
+            <div class="institution-info">
+                <img src="assets/images/Design System/Group.png" alt="Access Bank">
+                <span>Access Bank</span>
+            </div>
+
+            <span class="arrow">›</span>
+
+        </div>
+
+        <div class="institution-card" onclick="selectInstitution('Kuda', 'assets/images/Design System/Frame 81.png')">
+
+            <div class="institution-info">
+                <img src="assets/images/Design System/Frame 81.png" alt="Kuda">
+                <span>Kuda</span>
+            </div>
+
+            <span class="arrow">›</span>
+
+        </div>
+
+        <div class="institution-card" onclick="selectInstitution('Opay', 'assets/images/Design System/Group 72.png')">
+
+            <div class="institution-info">
+                <img src="assets/images/Design System/Group 72.png" alt="Opay">
+                <span>Opay</span>
+            </div>
+
+            <span class="arrow">›</span>
+
+        </div>
+
+        <div class="institution-card" onclick="selectInstitution('Moniepoint', 'assets/images/Design System/Group 73 (1).png')">
+
+            <div class="institution-info">
+                <img src="assets/images/Design System/Group 73 (1).png" alt="Moniepoint">
+                <span>Moniepoint</span>
+            </div>
+
+            <span class="arrow">›</span>
+
+        </div>
+
+    </div>
+
+    <div class="secure-box">
+
+        <div class="secure-header">
+            <img src="assets/images/Design System/Frame 10.png" alt="Security">
+            <span>Secure account connection</span>
+        </div>
+
+        <p>
+            Your credentials are never stored by PocketSync.
+        </p>
+
+    </div>
+
+</main>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
