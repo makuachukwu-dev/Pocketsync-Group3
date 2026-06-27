@@ -1,6 +1,9 @@
 
 // splash scren
-if (window.location.pathname.includes("index.html")) {
+if (
+    window.location.pathname === "/" ||
+    window.location.pathname.includes("index.html")
+) {
 
     setTimeout(() => {
         window.location.href = "onboarding-1.html";
