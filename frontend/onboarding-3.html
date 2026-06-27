@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="onboarding-screen">
+
+      <div class="onboarding-top onboarding-top-security">
+          <img
+                src="assets/images/Design System/frame.png"
+                alt="Security illustration"
+                class="onboarding-img security-img-top">
+
+          <img
+               src="assets/images/Design System/Container (3).png"
+               alt="Security details"
+               class="onboarding-img security-img-bottom">
+       </div>
+        <div class="onboarding-content">
+            <h1>Secure by Design</h1>
+            <p class="onboarding-description">Your data is encrypted and never shared. PocketSync uses read-only access to keep your accounts safe.</p>
+
+        </div>
+
+        <div class="onboarding-actions">
+            <button class="primary-btn" onclick="goToSignup()">Create Account</button>
+
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot active"></span>
+            </div>
+
+            <a href="login.html" class="skip-link">Log in</a>
+
+        </div>
+
+    </main>
+    <script src="js/app.js"></script>
+</body>
+</html>

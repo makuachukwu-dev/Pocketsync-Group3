@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permissions & Consent</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <main class="permissions-screen">
+
+       <button
+          class="permissions-back-btn"
+          onclick="history.back()">
+          ←
+      </button>
+
+        <div class="permissions-header">
+
+            <img
+                src="assets/images/Design System/frame.png"
+                alt="Security Shield"
+                class="shield-image">
+
+            <h1>Security Requirement</h1>
+
+            <p class="permissions-description">
+                PocketSync requires read-only access to securely sync your data.
+            </p>
+
+        </div>
+
+        <div class="permissions-card-wrapper">
+
+            <img
+                src="assets/images/Design System/Frame 111.png"
+                alt="Permissions Information"
+                class="permissions-card-image">
+
+        </div>
+
+        <div class="consent-section">
+
+            <label class="consent-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="consentCheck">
+
+                <span>
+                    I agree to the Terms of Service and allow PocketSync
+                    to access my data as described.
+                </span>
+
+            </label>
+
+        </div>
+
+        <button
+            class="primary-btn"
+            id="continueBtn"
+            onclick="continueToDashboard()">
+            Continue
+        </button>
+
+    </main>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
