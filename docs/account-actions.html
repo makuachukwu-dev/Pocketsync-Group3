@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Account Actions</title>
+
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<main class="actions-screen">
+
+    <h2>Account Actions</h2>
+
+    <div class="account-preview">
+        <img id="bankLogo" />
+        <h3 id="bankName"></h3>
+        <p id="bankNumber"></p>
+    </div>
+
+    <button onclick="goToRefresh()" class="primary-btn">
+        Refresh Balance
+    </button>
+
+    <button onclick="goToDisconnect()" class="danger-btn">
+        Disconnect Account
+    </button>
+
+    <button onclick="goBack()" class="secondary-btn">
+        Back
+    </button>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

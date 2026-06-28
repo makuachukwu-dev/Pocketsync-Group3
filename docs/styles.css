@@ -1241,3 +1241,328 @@ button {
         margin: 0 auto;
     }
 }
+
+
+.balance-card{
+    background:#0F172A;
+    color:white;
+    margin:20px;
+    padding:20px;
+    border-radius:16px;
+}
+
+.balance-card p{
+    opacity:.8;
+}
+
+.balance-card h1{
+    margin:10px 0;
+}
+
+.balance-card span{
+    font-size:13px;
+}
+
+.linked-accounts{
+    padding:0 20px;
+    margin-top:20px;
+}
+
+.accounts-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.add-new-btn{
+    border:none;
+    background:none;
+    color:#10B981;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.account-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:12px;
+    background:white;
+}
+
+.account-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.account-left img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+}
+
+.account-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.dots-btn{
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.action-modal-overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.4);
+    justify-content:center;
+    align-items:center;
+}
+
+.action-modal{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    width:280px;
+}
+
+.action-modal button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+}
+
+.disconnect-btn{
+    color:red;
+}
+
+.action-overlay{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:1000;
+}
+
+.action-sheet{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    background:#fff;
+
+    border-radius:20px 20px 0 0;
+
+    padding:20px;
+}
+
+.sheet-handle{
+    width:40px;
+    height:4px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    margin:0 auto 16px;
+}
+
+.sheet-close{
+    position:absolute;
+    right:16px;
+    top:16px;
+
+    border:none;
+    background:none;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+.selected-account{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:#EAF8F3;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin:20px 0;
+}
+
+.selected-account img{
+    width:32px;
+    height:32px;
+}
+
+.action-item{
+    width:100%;
+
+    text-align:left;
+
+    border:none;
+    background:white;
+
+    padding:14px 0;
+
+    cursor:pointer;
+
+    border-top:1px solid #eee;
+}
+
+.disconnect-item{
+    color:#F59E0B;
+}
+
+.refresh-card,
+.disconnect-card{
+    width:90%;
+    max-width:320px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    text-align:center;
+}
+
+.action-modal-overlay{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+
+.spinner{
+    width:40px;
+    height:40px;
+
+    border:4px solid #ddd;
+    border-top:4px solid #10B981;
+
+    border-radius:50%;
+
+    margin:0 auto 16px;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.confirm-disconnect{
+    width:100%;
+    height:48px;
+
+    border:none;
+
+    background:#F59E0B;
+    color:white;
+
+    border-radius:8px;
+
+    margin-top:20px;
+}
+
+.cancel-disconnect{
+    width:100%;
+    height:48px;
+
+    margin-top:12px;
+
+    border:1px solid #ddd;
+
+    background:white;
+
+    border-radius:8px;
+}
+
+
+.actions-screen {
+    max-width: 430px;
+    margin: auto;
+    padding: 24px;
+    text-align: center;
+}
+
+.account-preview {
+    margin: 40px 0;
+}
+
+.account-preview img {
+    width: 60px;
+    margin-bottom: 12px;
+}
+
+.account-preview h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.danger-btn {
+    width: 100%;
+    max-width: 311px;
+    height: 56px;
+    background: #E74444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.secondary-btn {
+    width: 100%;
+    max-width: 311px;
+    height: 56px;
+    background: #E5E7EB;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+.center-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<main class="dashboard-empty">
+
+
+<header class="dashboard-header">
+
+    <div class="dashboard-top">
+        <img src="assets/images/Design System/Frame 90.png" alt="PocketSync">
+
+        <button class="profile-btn">
+            <i class="fa-regular fa-user"></i>
+        </button>
+    </div>
+
+    <div class="dashboard-greeting">
+        <h2 id="userGreeting">Hello 👋</h2>
+        <p>Welcome to your financial overview</p>
+    </div>
+
+</header>
+
+
+
+<section class="balance-card">
+
+    <p>Total Balance</p>
+    <h1>₦2,426,108</h1>
+    <span>Across 5 connected accounts</span>
+
+</section>
+
+
+<section class="linked-accounts">
+
+    <div class="accounts-header">
+        <h3>Linked Accounts</h3>
+
+        <button class="add-new-btn"
+            onclick="window.location.href='institution-selection.html'">
+            + Add New
+        </button>
+    </div>
+
+    <!-- GTBANK -->
+    <div class="account-card">
+
+        <div class="account-left">
+            <img src="assets/images/Design System/Group 71.png" alt="GTBank">
+
+            <div>
+                <h4>GTBank</h4>
+                <p>•••• 7152</p>
+            </div>
+        </div>
+
+        <div class="account-right">
+            <h4>₦1,174,607</h4>
+
+            <button class="dots-btn"
+                onclick="openActions('GTBank','7152','assets/images/Design System/Group 71.png')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="account-card">
+
+        <div class="account-left">
+            <img src="assets/images/Design System/Group.png" alt="Access Bank">
+
+            <div>
+                <h4>Access Bank</h4>
+                <p>•••• 8421</p>
+            </div>
+        </div>
+
+        <div class="account-right">
+            <h4>₦850,000</h4>
+
+            <button class="dots-btn"
+                onclick="openActions('Access Bank','8421','assets/images/Design System/Group.png')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+    
+    <div class="account-card">
+
+        <div class="account-left">
+            <img src="assets/images/Design System/Frame 81.png" alt="Kuda">
+
+            <div>
+                <h4>Kuda</h4>
+                <p>•••• 8025</p>
+            </div>
+        </div>
+
+        <div class="account-right">
+            <h4>₦1,251,501</h4>
+
+            <button class="dots-btn"
+                onclick="openActions('Kuda','8025','assets/images/Design System/Frame 81.png')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+   
+    <div class="account-card">
+
+        <div class="account-left">
+            <img src="assets/images/Design System/Group 72.png" alt="Opay">
+
+            <div>
+                <h4>Opay</h4>
+                <p>•••• 2345</p>
+            </div>
+        </div>
+
+        <div class="account-right">
+            <h4>₦420,000</h4>
+
+            <button class="dots-btn"
+                onclick="openActions('Opay','2345','assets/images/Design System/Group 72.png')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+    
+    <div class="account-card">
+
+        <div class="account-left">
+            <img src="assets/images/Design System/Group 73 (1).png" alt="Moniepoint">
+
+            <div>
+                <h4>Moniepoint</h4>
+                <p>•••• 9928</p>
+            </div>
+        </div>
+
+        <div class="account-right">
+            <h4>₦315,000</h4>
+
+            <button class="dots-btn"
+                onclick="openActions('Moniepoint','9928','assets/images/Design System/Group 73 (1).png')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="#" class="nav-item">
+        <i class="fa-regular fa-credit-card"></i>
+        <span>Accounts</span>
+    </a>
+
+    <a href="#" class="nav-item">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+    </a>
+
+</nav>
+
+</main>
+
+
+
+<div id="actionModal" class="action-modal-overlay">
+
+    <div class="action-modal">
+
+        <h3>Account Actions</h3>
+
+        <button onclick="refreshAccount()">
+            Refresh Balance
+        </button>
+
+        <button class="disconnect-btn" onclick="disconnectAccount()">
+            Disconnect Account
+        </button>
+
+        <button onclick="closeModal()">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

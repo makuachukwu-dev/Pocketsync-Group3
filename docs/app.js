@@ -242,6 +242,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function dashboardComingSoon() {
-    alert("Dashboard coming soon.");
+function goToDashboard() {
+    window.location.href = "dashboard.html";
 }
+
+let selectedAccount = {};
+
+
+//open actions from dashboard
+
+function openActions(name, number, logo) {
+
+    selectedAccount = {
+        name,
+        number,
+        logo
+    };
+
+    localStorage.setItem("selectedAccount", JSON.stringify(selectedAccount));
+
+    window.location.href = "account-actions.html";
+}
+
+
+// load acccount on action page
+
+function loadSelectedAccount() {
+
+    const data = JSON.parse(localStorage.getItem("selectedAccount"));
+
+    if (!data) return;
+
+    const nameEl = document.getElementById("bankName");
+    const numberEl = document.getElementById("bankNumber");
+    const logoEl = document.getElementById("bankLogo");
+
+    if (nameEl) nameEl.textContent = data.name;
+    if (numberEl) numberEl.textContent = "•••• " + data.number;
+    if (logoEl) logoEl.src = data.logo;
+}
+
+
+// navigation
+
+function goToRefresh() {
+    window.location.href = "refresh-account.html";
+}
+
+function goToDisconnect() {
+    window.location.href = "disconnect-account.html";
+}
+
+function goBack() {
+    window.location.href = "dashboard.html";
+}
+
+
+// refresh account
+
+if (window.location.pathname.includes("refresh-account.html")) {
+
+    setTimeout(() => {
+        alert("Account refreshed successfully ✔");
+        window.location.href = "dashboard.html";
+    }, 2000);
+}
+
+
+// disconnect account
+
+function confirmDisconnect() {
+
+    const data = JSON.parse(localStorage.getItem("selectedAccount"));
+
+    if (!data) return;
+
+    const confirmed = confirm(`Disconnect ${data.name}?`);
+
+    if (confirmed) {
+        alert(`${data.name} disconnected successfully`);
+        window.location.href = "dashboard.html";
+    }
+}
+
+// init.page load
+document.addEventListener("DOMContentLoaded", () => {
+    loadSelectedAccount();
+});
